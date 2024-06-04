@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, jsonify
 import serial
 
 app = Flask(__name__)
@@ -13,11 +13,11 @@ def read_serial():
         sensor_value = data[0]
         alkohol_ppm = data[1]
         voltage = data[2]
-        yield f"data:{sensor_value},{alkohol_ppm},{voltage}\n\n"
+        yield jsonify(sensor_value=sensor_value, alkohol_ppm=alkohol_ppm, voltage=voltage)
 
 @app.route('/stream')
 def stream():
-    return Response(read_serial(), mimetype='text/event-stream')
+    return read_serial()
 
 if __name__ == '__main__':
     app.run(debug=True)

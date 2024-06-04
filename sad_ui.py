@@ -8,6 +8,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from qwt_plot import QwtPlot 
+from qwt_scaxle_widget import QwtScaleWidget
 
 
 class Ui_Dialog(object):
@@ -50,8 +52,7 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "mg/l"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("Dialog", "Tab 1"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("Dialog", "Tab 2"))
-from qwt_plot import QwtPlot
-from qwt_scale_widget import QwtScaleWidget
+
 
 
 if __name__ == "__main__":

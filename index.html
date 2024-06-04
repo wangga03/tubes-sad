@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor Data</title>
+</head>
+<body>
+    <h1>Sensor Data</h1>
+    <div id="sensor-data"></div>
+    <script>
+        var eventSource = new EventSource("/stream");
+        eventSource.onmessage = function(event) {
+            var data = event.data.split(",");
+            var sensorValue = data[0];
+            var alkoholPPM = data[1];
+            var voltage = data[2];
+            document.getElementById("sensor-data").innerHTML = `
+                <p>Sensor Value: ${sensorValue}</p>
+                <p>Alkohol PPM: ${alkoholPPM}</p>
+                <p>Voltage: ${voltage}</p>
+            `;
+        };
+    </script>
+</body>
+</html>
