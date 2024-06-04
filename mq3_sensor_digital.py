@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Setup GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN)
+GPIO.setup(4, GPIO.IN)
 
 sensor_data = {"ppm": 0}
 

@@ -1,11 +1,8 @@
-from flask import Flask, jsonify
 import RPi.GPIO as GPIO
 import time
 
 # Konfigurasi pin GPIO Raspberry Pi
 ANALOG_PIN = 7  # Ganti dengan nomor pin analog yang Anda gunakan
-
-app = Flask(__name__)
 
 def read_analog(pin):
     """
@@ -25,15 +22,16 @@ def convert_to_alcohol_level(adc_value):
     alcohol_level = adc_value * 0.1  # Contoh sederhana, ganti dengan rumus yang sesuai
     return alcohol_level
 
-@app.route('/')
-def index():
-    adc_value = read_analog(ANALOG_PIN)
-    alcohol_level = convert_to_alcohol_level(adc_value)
-    return jsonify({"adc_value": adc_value, "alcohol_level": alcohol_level})
-
-if __name__ == "__main__":
+def main():
     try:
         GPIO.setmode(GPIO.BOARD)  # Mode GPIO menggunakan nomor pin fisik Raspberry Pi
-        app.run(host='127.0.0.1', port=5000)  # Menjalankan Flask pada alamat IP 0.0.0.0 dan port 5000
+        while True:
+            adc_value = read_analog(ANALOG_PIN)
+            alcohol_level = convert_to_alcohol_level(adc_value)
+            print("Nilai ADC: {}, Kadar Alkohol: {:.2f}".format(adc_value, alcohol_level))
+            time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()  # Membersihkan pin GPIO saat program dihentikan
+
+if __name__ == "__main__":
+    main()
