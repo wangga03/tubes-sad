@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP8266 Data Logger</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>ESP8266 Data Logger</h1>
+  <div>
+    <canvas id="ppmChart" width="400" height="200"></canvas>
+  </div>
+  <div>
+    <h2>Data Real-time</h2>
+    <div id="realtimeData"></div>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const response = await fetch('http://localhost:3000/data');
+      const data = await response.json();
+      
+      const timestamps = data.map(entry => new Date(entry.timestamp).toLocaleString());
+      const ppms = data.map(entry => entry.ppm);
+
+      document.getElementById('realtimeData').innerText = `PPM: ${ppms[0]}, Timestamp: ${timestamps[0]}`;
+
+      const ctx = document.getElementById('ppmChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timestamps,
+          datasets: [{
+            label: 'PPM',
+            data: ppms,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              type: 'time',
+              time: {
+                unit: 'minute'
+              }
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    fetchData();
+    setInterval(fetchData, 60000); // Update setiap 60 detik
+  </script>
+</body>
+</html>
