@@ -1,10 +1,10 @@
 const int MQ2_pin = A0;
 const byte relay = 3;
 int Rload = 1000;
-float a = 658.71;
-float b = -2.168;
+float a = 0.403487;
+float b =-1.48861;
 float Rs;
-float Ro = 74190.0; //cari nilai Ro menggunakan kodingan MQ2_mencari_Ro
+float Ro = 43000; //cari nilai Ro menggunakan kodingan MQ2_mencari_Ro
 float adcRaw;
 
 
@@ -18,7 +18,7 @@ void loop(){
   Rs = ((1023.0 * Rload) / adcRaw) - Rload; //resistansi sensor saat udara netral 
   float ppm = a * pow((Rs/Ro), b);
   Serial.print("adc Raw : ");
-  Serial.println(adcRaw); //nilai tegangan sensor gas
+  Serial.println(Rs); //nilai tegangan sensor gas
   Serial.print("PPM : ");
   Serial.println(ppm); //jumlah gas yang terdeteksi dalam satuan ppm
   if(ppm >= 1000){

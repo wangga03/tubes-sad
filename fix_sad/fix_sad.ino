@@ -5,7 +5,7 @@ const int RL_VALUE = 10000; // Nilai RL dalam ohm (10 kΩ)
 const int Vcc = 5; // Tegangan suplai sensor (5V)
 
 // Nilai Ro perlu diukur dengan menggunakan gas referensi pada konsentrasi yang diketahui
-const float Ro = 74190.0; // Sesuaikan dengan nilai Ro yang diukur sebelumnya
+const float Ro = 5085.0; // Sesuaikan dengan nilai Ro yang diukur sebelumnya
 
 void setup() {
   Serial.begin(9600); // Mulai komunikasi serial pada baud rate 9600
@@ -21,7 +21,6 @@ void loop() {
   // Gunakan persamaan atau tabel kalibrasi untuk mengonversi rasio ke ppm
   // Misalkan menggunakan persamaan logaritmik sederhana berdasarkan datasheet
   float ppm = pow(10, (log10(ratio) - 0.6) / -0.2);
-  
   Serial.print("Rs: ");
   Serial.print(Rs);
   Serial.print(" ohm, ");

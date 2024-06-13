@@ -3,7 +3,7 @@ const int RL_VALUE = 10000; // Nilai RL dalam ohm (10 kΩ)
 const int Vcc = 5; // Tegangan suplai sensor (5V)
 
 // Nilai Ro perlu diukur dengan menggunakan gas referensi pada konsentrasi yang diketahui
-const float Ro = 74190.2; // Sesuaikan dengan nilai Ro yang diukur sebelumnya
+const float Ro = 4000.2; // Sesuaikan dengan nilai Ro yang diukur sebelumnya
 
 void setup() {
   Serial.begin(9600); // Mulai komunikasi serial pada baud rate 9600

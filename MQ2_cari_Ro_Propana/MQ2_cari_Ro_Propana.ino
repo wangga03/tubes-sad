@@ -1,8 +1,8 @@
 const int MQ2_pin = A0;
 int Rload = 1000;
-float ppm = 500.0;
-float a = 658.71;
-float b = -2.168;
+float ppm = 10.0;
+float a = 0.403487;
+float b = -1.48861;
 
 void setup(){
   Serial.begin(9600);
